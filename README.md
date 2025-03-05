@@ -4,7 +4,7 @@ Intended to be a starting point for building backend servers with Golang
 
 ## TODO:
 
--   [ ] Setup Makefile
+-   [x] Makefile
 -   [ ] Setup from config.json
 -   [ ] Database connection
 -   [ ] Support different databases
