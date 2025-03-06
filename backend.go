@@ -6,20 +6,14 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"path/filepath"
 	"time"
+
+	"github.com/cpgoodwi/gobackend/config"
+	"github.com/cpgoodwi/gobackend/db"
 )
 
-type Config struct {
-	DatabaseType string `json:"databaseType"`
-	ServerURL    string `json:"serverUrl"`
-	Port         int    `json:"port"`
-}
-
-// TODO: set up configs for other database types
-
 type Backend struct {
-	Config  Config
+	Config  config.AppConfig
 	DB      *sql.DB
 	Router  *http.ServeMux
 	Logger  *log.Logger
@@ -28,32 +22,24 @@ type Backend struct {
 
 func NewBackend() (*Backend, error) {
 	// default config
-	config := Config{
-		DatabaseType: "sqlite",
-		ServerURL:    "http://localhost",
-		Port:         8080,
+	config := config.AppConfig{
+		DataSource: "postgresql://root:password@localhost:5433/gobackend?sslmode=disable",
+		DataDir:    "/data",
+		ServerURL:  "http://localhost",
+		Port:       8080,
 	}
 
 	// TODO: load config from file
 
+	// ensure data directory exists
+	if err := os.MkdirAll(config.DataDir, 0755); err != nil {
+		return nil, fmt.Errorf("failed to create data directory: %w", err)
+	}
+
 	// intialize database
-	var db *sql.DB
-	var err error
-	switch config.DatabaseType {
-	case "sqlite":
-		// ensure data directory exists
-		if err = os.MkdirAll("./data", 0755); err != nil {
-			return nil, fmt.Errorf("failed to create data directory: %w", err)
-		}
-
-		dbPath := filepath.Join("./data", "data.db")
-		db, err = sql.Open("sqlite3", dbPath)
-		if err != nil {
-			return nil, fmt.Errorf("failed to open database: %w", err)
-		}
-
-	default:
-		return nil, fmt.Errorf("unsupported database type: %s", config.DatabaseType)
+	db, err := db.GetDB()
+	if err != nil {
+		return nil, fmt.Errorf("failed to open database: %w", err)
 	}
 
 	app := &Backend{

@@ -8,8 +8,8 @@ Intended to be a starting point for building backend servers with Golang
 -   [ ] Setup from config.json
 -   [ ] Database connection
 -   [ ] Support different databases
-    -   [ ] Sqlite
     -   [ ] Postgres
+    -   [ ] Sqlite
     -   [ ] Mysql
 -   [ ] Admin dashboard UI
 -   [ ] REST API
