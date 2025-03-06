@@ -42,7 +42,7 @@ func NewBackend() (*Backend, error) {
 		return nil, fmt.Errorf("failed to open database: %w", err)
 	}
 
-	app := &Backend{
+	be := &Backend{
 		Config:  config,
 		DB:      db,
 		Router:  http.NewServeMux(),
@@ -50,21 +50,21 @@ func NewBackend() (*Backend, error) {
 		Started: time.Now(),
 	}
 
-	return app, nil
+	return be, nil
 }
 
-func (app *Backend) Start() error {
+func (be *Backend) Start() error {
 	// register routes
-	app.registerRoutes()
+	be.registerRoutes()
 
 	// start server
-	serverAddr := fmt.Sprintf("%s:%d", app.Config.ServerURL, app.Config.Port)
-	app.Logger.Printf("starting server on %s", serverAddr)
+	serverAddr := fmt.Sprintf("%s:%d", be.Config.ServerURL, be.Config.Port)
+	be.Logger.Printf("starting server on %s", serverAddr)
 
-	return http.ListenAndServe(fmt.Sprintf(":%d", app.Config.Port), app.Router)
+	return http.ListenAndServe(fmt.Sprintf(":%d", be.Config.Port), be.Router)
 }
 
-func (app *Backend) registerRoutes() {
+func (be *Backend) registerRoutes() {
 	// api routes
 
 	// admin ui routes
