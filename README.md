@@ -17,15 +17,15 @@ For me in VSCode it looks like:
 
 ## TODO:
 
-- [x] Makefile
-- [ ] Setup from config.json
-- [ ] Database connection
-- [ ] Support different databases
-  - [ ] Postgres
-  - [ ] Sqlite
-  - [ ] Mysql
-- [ ] Admin dashboard UI
-- [ ] REST API
-- [ ] Authentication
-- [ ] Realtime subscriptions
-- [ ] File storage
+-   [x] Makefile
+-   [ ] Setup from config.json
+-   [ ] Database connection
+-   [ ] Support different databases
+    -   [ ] Postgres
+    -   [ ] Sqlite
+    -   [ ] Mysql
+-   [ ] Admin dashboard UI
+-   [ ] REST API
+-   [ ] Authentication
+-   [ ] Realtime subscriptions
+-   [ ] File storage
