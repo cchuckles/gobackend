@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/cpgoodwi/gobackend"
+	"github.com/cchuckles/gobackend"
 )
 
 func main() {

@@ -8,8 +8,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/cpgoodwi/gobackend/config"
-	"github.com/cpgoodwi/gobackend/db"
+	"github.com/cchuckles/gobackend/config"
+	"github.com/cchuckles/gobackend/db"
 )
 
 type Backend struct {
