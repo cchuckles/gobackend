@@ -1,4 +1,4 @@
-module github.com/cchuckles/gobackend
+module github.com/goodchuckle/gobackend
 
 go 1.24.0
 
